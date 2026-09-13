@@ -1,0 +1,7 @@
+.env
+keys/
+*.p8
+traces/
+.venv/
+node_modules/
+__pycache__/

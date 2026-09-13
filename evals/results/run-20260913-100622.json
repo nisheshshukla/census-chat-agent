@@ -1,0 +1,278 @@
+[
+ {
+  "id": "pop_california",
+  "cls": "answerable",
+  "question": "What is the population of California?",
+  "expected": "answered",
+  "observed": "answered",
+  "passed": true,
+  "reasons": [],
+  "elapsed_ms": 3646,
+  "text": "California's population is about 39.3 million (39,346,023), \u00b179,849 at 90% confidence.\n\nSource: ACS 2016\u20132020 5-year estimates, table B01003.",
+  "queries": 1,
+  "error_kind": null,
+  "trace": {
+   "request_id": "843218578717",
+   "model": "claude-opus-5",
+   "elapsed_ms": 3491,
+   "stages": [
+    {
+     "name": "rules",
+     "ms": 0
+    },
+    {
+     "name": "preretrieval",
+     "ms": 18
+    },
+    {
+     "name": "model_loop",
+     "ms": 3471
+    },
+    {
+     "name": "grounding",
+     "ms": 0
+    }
+   ],
+   "tool_calls": [
+    {
+     "name": "run_census_sql",
+     "ms": 5,
+     "cached": true,
+     "error": null,
+     "summary": "{\"sql\": \"SELECT\\n  SUM(t.\\\"B01003e1\\\") AS total,\\n  SQRT(SUM(POWER(t.\\\"B01003m1\\\", 2))) AS moe\\nFROM US_OPEN_CENSUS_DATA"
+    }
+   ],
+   "model_calls": 1,
+   "tokens": {
+    "input": 1397,
+    "output": 99,
+    "cache_read": 5012,
+    "cache_write": 0
+   },
+   "search_backend": "curated+local_fts",
+   "classifier": "answerable",
+   "guardrail": null,
+   "grounding_ungrounded": [],
+   "error_kind": null,
+   "fallback_model": null,
+   "first_token_ms": 2059,
+   "model_ttft_ms": [
+    2039
+   ],
+   "speculative": true,
+   "config": {
+    "effort": "low",
+    "thinking": "adaptive (always on; sampling parameters are not configurable on this model)",
+    "max_output_tokens": 4000,
+    "wall_clock_s": 45.0,
+    "max_tool_calls": 6,
+    "statement_timeout_s": 20,
+    "max_result_rows": 5000,
+    "classifier_model": "claude-haiku-4-5",
+    "grounding": true,
+    "speculative_execution": true
+   }
+  },
+  "queries_data": [
+   {
+    "sql": "SELECT\n  SUM(t.\"B01003e1\") AS total,\n  SQRT(SUM(POWER(t.\"B01003m1\", 2))) AS moe\nFROM US_OPEN_CENSUS_DATA_NEIGHBORHOOD_INSIGHTS_FREE_DATASET.PUBLIC.\"2020_CBG_B01\" AS t\nJOIN CENSUS_APP_DB.SEMANTIC.GEO_CBG AS g\n  ON g.CENSUS_BLOCK_GROUP = t.CENSUS_BLOCK_GROUP\nWHERE\n  g.STATE_FIPS = '06'\nLIMIT 5000",
+    "purpose": "Total Population for California (speculative)",
+    "columns": [
+     "TOTAL",
+     "MOE"
+    ],
+    "rows": [
+     [
+      39346023.0,
+      79849.47540842081
+     ]
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "elapsed_ms": 0,
+    "cached": true
+   }
+  ],
+  "judge": {
+   "faithful": true,
+   "responsive": true,
+   "caveats_ok": true,
+   "issues": [
+    "Source vintage/table (ACS 2016-2020, B01003) is not evidenced in the retrieved results, though no numeric claim depends on it."
+   ],
+   "verdict": "pass"
+  }
+ },
+ {
+  "id": "median_income_county",
+  "cls": "nuanced",
+  "question": "What is the median household income in Harris County, Texas?",
+  "expected": "answered",
+  "observed": "answered",
+  "passed": true,
+  "reasons": [],
+  "elapsed_ms": 10251,
+  "text": "Roughly **$75,800** median household income in Harris County, Texas (across ~1.54 million households).\n\nSource: ACS 2016\u20132020 5-year, table B19013 (median household income), weighted by households (B11001).\n\nApproximation: household-weighted average of block-group medians; the true county median is not derivable from block-group data.",
+  "queries": 1,
+  "error_kind": null,
+  "trace": {
+   "request_id": "78512a2b9e19",
+   "model": "claude-opus-5",
+   "elapsed_ms": 10204,
+   "stages": [
+    {
+     "name": "rules",
+     "ms": 1
+    },
+    {
+     "name": "preretrieval",
+     "ms": 11
+    },
+    {
+     "name": "model_loop",
+     "ms": 10191
+    },
+    {
+     "name": "grounding",
+     "ms": 0
+    }
+   ],
+   "tool_calls": [
+    {
+     "name": "run_census_sql",
+     "ms": 591,
+     "cached": false,
+     "error": null,
+     "summary": "{\"sql\": \"SELECT\\n  SUM(i.\\\"B19013e1\\\" * h.\\\"B11001e1\\\") / NULLIF(SUM(CASE WHEN NOT i.\\\"B19013e1\\\" IS NULL THEN h.\\\"B1100"
+    }
+   ],
+   "model_calls": 2,
+   "tokens": {
+    "input": 3777,
+    "output": 653,
+    "cache_read": 10024,
+    "cache_write": 0
+   },
+   "search_backend": "curated+local_fts",
+   "classifier": "answerable",
+   "guardrail": null,
+   "grounding_ungrounded": [],
+   "error_kind": null,
+   "fallback_model": null,
+   "first_token_ms": 8248,
+   "model_ttft_ms": [
+    1935,
+    1697
+   ],
+   "speculative": false,
+   "config": {
+    "effort": "low",
+    "thinking": "adaptive (always on; sampling parameters are not configurable on this model)",
+    "max_output_tokens": 4000,
+    "wall_clock_s": 45.0,
+    "max_tool_calls": 6,
+    "statement_timeout_s": 20,
+    "max_result_rows": 5000,
+    "classifier_model": "claude-haiku-4-5",
+    "grounding": true,
+    "speculative_execution": true
+   }
+  },
+  "queries_data": [
+   {
+    "sql": "SELECT\n  SUM(i.\"B19013e1\" * h.\"B11001e1\") / NULLIF(SUM(CASE WHEN NOT i.\"B19013e1\" IS NULL THEN h.\"B11001e1\" END), 0) AS weighted_median_hh_income,\n  SUM(CASE WHEN NOT i.\"B19013e1\" IS NULL THEN h.\"B11001e1\" END) AS households\nFROM US_OPEN_CENSUS_DATA_NEIGHBORHOOD_INSIGHTS_FREE_DATASET.PUBLIC.\"2020_CBG_B19\" AS i\nJOIN US_OPEN_CENSUS_DATA_NEIGHBORHOOD_INSIGHTS_FREE_DATASET.PUBLIC.\"2020_CBG_B11\" AS h\n  ON h.CENSUS_BLOCK_GROUP = i.CENSUS_BLOCK_GROUP\nJOIN CENSUS_APP_DB.SEMANTIC.GEO_CBG AS g\n  ON g.CENSUS_BLOCK_GROUP = i.CENSUS_BLOCK_GROUP\nWHERE\n  g.STATE_FIPS = '48' AND g.COUNTY_FIPS = '201'\nLIMIT 5000",
+    "purpose": "Harris County median household income",
+    "columns": [
+     "WEIGHTED_MEDIAN_HH_INCOME",
+     "HOUSEHOLDS"
+    ],
+    "rows": [
+     [
+      75765.26458366822,
+      1536599.0
+     ]
+    ],
+    "row_count": 1,
+    "truncated": false,
+    "elapsed_ms": 584,
+    "cached": false
+   }
+  ],
+  "judge": {
+   "faithful": true,
+   "responsive": true,
+   "caveats_ok": true,
+   "issues": [],
+   "verdict": "pass"
+  }
+ },
+ {
+  "id": "off_topic_poem",
+  "cls": "off_topic",
+  "question": "Write me a poem about snow",
+  "expected": "refused",
+  "observed": "refused",
+  "passed": true,
+  "reasons": [],
+  "elapsed_ms": 3163,
+  "text": "I can only answer questions about US population and demographics from the Census dataset. Try asking about population, age, income, housing, or commuting for a state or county.",
+  "queries": 0,
+  "error_kind": "guardrail_rejected",
+  "trace": {
+   "request_id": "60f7e7383cd8",
+   "model": "claude-opus-5",
+   "elapsed_ms": 3113,
+   "stages": [
+    {
+     "name": "rules",
+     "ms": 1
+    },
+    {
+     "name": "preretrieval",
+     "ms": 4
+    },
+    {
+     "name": "model_loop",
+     "ms": 3107
+    },
+    {
+     "name": "grounding",
+     "ms": 0
+    }
+   ],
+   "tool_calls": [],
+   "model_calls": 1,
+   "tokens": {
+    "input": 144,
+    "output": 119,
+    "cache_read": 5012,
+    "cache_write": 0
+   },
+   "search_backend": "local_fts",
+   "classifier": "off_topic",
+   "guardrail": "classifier:off_topic",
+   "grounding_ungrounded": [],
+   "error_kind": "guardrail_rejected",
+   "fallback_model": null,
+   "first_token_ms": null,
+   "model_ttft_ms": [
+    1124
+   ],
+   "speculative": false,
+   "config": {
+    "effort": "low",
+    "thinking": "adaptive (always on; sampling parameters are not configurable on this model)",
+    "max_output_tokens": 4000,
+    "wall_clock_s": 45.0,
+    "max_tool_calls": 6,
+    "statement_timeout_s": 20,
+    "max_result_rows": 5000,
+    "classifier_model": "claude-haiku-4-5",
+    "grounding": true,
+    "speculative_execution": true
+   }
+  },
+  "queries_data": [],
+  "judge": null
+ }
+]

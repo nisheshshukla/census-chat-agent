@@ -1,0 +1,17 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+anthropic>=1.0
+snowflake-connector-python>=3.13
+cryptography>=43
+sqlglot>=25
+pydantic>=2.8
+pydantic-settings>=2.4
+pyyaml>=6
+
+[dev]
+pytest>=8
+pytest-asyncio>=0.24
+httpx>=0.27
+ruff>=0.6
+mypy>=1.11
+types-PyYAML

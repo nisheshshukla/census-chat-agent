@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "api",
+      "runtimeExecutable": ".venv/bin/uvicorn",
+      "runtimeArgs": ["census_agent.app.main:app", "--host", "127.0.0.1", "--port", "8080"],
+      "port": 8080
+    },
+    {
+      "name": "api-noauth",
+      "runtimeExecutable": "env",
+      "runtimeArgs": ["DEMO_PASSWORD=", ".venv/bin/uvicorn", "census_agent.app.main:app", "--host", "127.0.0.1", "--port", "8080"],
+      "port": 8080
+    }
+  ]
+}
