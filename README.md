@@ -4,8 +4,6 @@ A chat agent that answers natural-language questions about the US population, gr
 **US Open Census Data & Neighborhood Insights** dataset on the Snowflake Marketplace. Every answer
 comes from a SQL query the agent wrote and ran; the query is shown next to the answer.
 
-**Live demo:** https://census-chat-agent-nish.fly.dev
-**Password:** `census-35a0ba9b` (enter it on the sign-in screen; the sign-in lasts seven days). For scripts, HTTP basic auth also works with user `reviewer` and the same password.
 
 Companion documents: [REFLECTION.md](REFLECTION.md) (process, tradeoffs, what I'd do next),
 [docs/PLAN.md](docs/PLAN.md), [docs/eval-results.md](docs/eval-results.md) (behavioral eval run).
